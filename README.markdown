@@ -1,0 +1,2 @@
+Capistrano Assets sync
+======================

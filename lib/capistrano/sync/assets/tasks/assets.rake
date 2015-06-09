@@ -1,3 +1,6 @@
+require File.expand_path('../../asset', __FILE__)
+require File.expand_path('../../uitls', __FILE__)
+
 namespace :assets do
   desc 'Synchronize your remote assets using local assets'
   namespace :push do

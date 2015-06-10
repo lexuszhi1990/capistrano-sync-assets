@@ -1,6 +1,6 @@
 module Capistrano
   module Sync
-    module Assets
+    module Asset
       VERSION = "0.0.4"
     end
   end

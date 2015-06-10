@@ -2,30 +2,39 @@ namespace :sync do
   namespace :assets do
     desc 'Synchronize your remote assets using local assets'
     task :push do
-      on roles(:app) do
+      on release_roles :all do
         within release_path do
-          with rails_env: fetch(:rails_env) do
-            # require 'pry'; binding.pry
-            # puts sync dirs
+          # require 'pry'; binding.pry
 
-            # init asset with cap
-            servers = Capistrano::Configuration.env.send(:servers)
-            server = servers.detect { |s| s.roles.include?(:app) }
-            port = server.netssh_options[:port] || 22
-            user = server.netssh_options[:user]
+          # puts sync dirs
+          sync_assets_dirs = fetch(:sync_assets_dirs)
 
-            # ask whether sync with backup
+          # init asset with cap
 
-            # do the sync
-            # system("rsync -a --del -L -K -vv --progress --rsh='ssh -p #{port}' #{user}@#{server}:#{cap.current_path}/#{dir} #{cap.fetch(:local_assets_dir)}")
-          end
+          # ask whether sync with backup
+
+          # do the sync
         end
       end
     end
 
     desc 'Synchronize your local assets using remote assets'
     task :pull do
-      puts 'pull'
+      on roles(:app) do
+        within release_path do
+          with rails_env: fetch(:rails_env) do
+            # require 'pry'; binding.pry
+
+            # puts sync dirs
+
+            # init asset with cap
+
+            # ask whether sync with backup
+
+            # do the sync
+          end
+        end
+      end
     end
   end
 end

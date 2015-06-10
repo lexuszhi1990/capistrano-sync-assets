@@ -1,1 +1,1 @@
-load File.expand_path('../assets/tasks.rb', __FILE__)
+load File.expand_path('../tasks/assets.rake', __FILE__)

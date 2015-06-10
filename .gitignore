@@ -3,3 +3,4 @@ Gemfile.lock
 .ruby-gemset
 pkg/
 *.DS_Store
+tmp

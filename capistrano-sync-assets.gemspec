@@ -5,7 +5,7 @@ require "capistrano/sync/assets/version"
 
 Gem::Specification.new do |s|
   s.name        = "capistrano-sync-assets"
-  s.version     = Capistrano::Sync::Assets::VERSION.dup
+  s.version     = Capistrano::Sync::Asset::VERSION.dup
   s.platform    = Gem::Platform::RUBY
   s.license     = 'MIT'
   s.authors     = ['David Fu']

@@ -1,6 +1,6 @@
 module Capistrano
   module Sync
-    module Assets
+    module Asset
       def initialize(cap)
         servers = Capistrano::Configuration.env.send(:servers)
         server = servers.detect { |s| s.roles.include?(:app) }

@@ -1,19 +1,22 @@
+require File.expand_path('../../assets/asset.rb', __FILE__)
+
 namespace :sync do
   namespace :assets do
     desc 'Synchronize your remote assets using local assets'
     task :push do
       on release_roles :all do
-        within release_path do
-          # require 'pry'; binding.pry
-
+        within shared_path do
           # puts sync dirs
           sync_assets_dirs = fetch(:sync_assets_dirs)
+          info "the assets dirs as #{sync_assets_dirs.join(', ')}"
 
           # init asset with cap
+          asset = Capistrano::Sync::Asset.new(self)
 
           # ask whether sync with backup
 
           # do the sync
+          asset.push
         end
       end
     end
@@ -21,17 +24,19 @@ namespace :sync do
     desc 'Synchronize your local assets using remote assets'
     task :pull do
       on roles(:app) do
-        within release_path do
+        within shared_path do
           with rails_env: fetch(:rails_env) do
-            # require 'pry'; binding.pry
-
-            # puts sync dirs
+            sync_assets_dirs = fetch(:sync_assets_dirs)
+            info "the assets dirs as #{sync_assets_dirs.join(', ')}"
 
             # init asset with cap
-
-            # ask whether sync with backup
+            asset = Capistrano::Sync::Asset.new(self)
 
             # do the sync
+            sync_assets_dirs.each do |dir|
+              # TODO: ask whether sync with backup
+              asset.pull(dir)
+            end
           end
         end
       end

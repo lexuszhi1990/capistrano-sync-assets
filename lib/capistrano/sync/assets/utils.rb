@@ -16,9 +16,8 @@ module Utils
       #
       # Comparison:
       # dir[0, dir.length-1]:  1844071.9 i/s
-      # split('/').join:   406966.0 i/s - 4.53x slower
-
-      dir.end_with? '/' ? dir[0, dir.length-1] : dir
+      # split('/').join:        406966.0 i/s - 4.53x slower
+      dir.end_with?('/') ? dir[0, dir.length-1] : dir
     end
 
     def yes_or_no?(msg, prompt = "(y)es, (n)o ")

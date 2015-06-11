@@ -11,11 +11,14 @@ namespace :sync do
           info "the assets dirs as #{sync_assets_dirs.join(', ')}"
           asset = Capistrano::Sync::Asset.new(self)
           sync_assets_dirs.each do |dir|
-            server_asset_dir = Utils.assets_dir "#{@shared_path}/#{dir}"
+            server_asset_dir = Utils.assets_dir "#{shared_path}/#{dir}"
             local_asset_dir = Utils.assets_dir "#{Dir.pwd}/#{dir}"
             # TODO: ask whether sync with backup
-            asset.backup_server_asset(local_asset_dir)
-            asset.pull(dir)
+            if Utils.yes_or_no?("Are you SURE to upload the local assets to remote?")
+              require 'pry'; binding.pry
+              asset.backup_server_asset(dir)
+              asset.push(local_asset_dir, server_asset_dir)
+            end
           end
         end
       end
@@ -30,13 +33,12 @@ namespace :sync do
             info "the assets dirs as #{sync_assets_dirs.join(', ')}"
             asset = Capistrano::Sync::Asset.new(self)
             sync_assets_dirs.each do |dir|
-              server_asset_dir = Utils.assets_dir "#{@shared_path}/#{dir}"
+              server_asset_dir = Utils.assets_dir "#{shared_path}/#{dir}"
               local_asset_dir = Utils.assets_dir "#{Dir.pwd}/#{dir}"
-              # TODO: ask whether sync with backup
-              info "backup the #{local_asset_dir}, move #{local_asset_dir} to #{local_asset_dir}_bak"
+              info "backup: moving #{local_asset_dir} to #{local_asset_dir}_bak"
               asset.backup_local_asset(local_asset_dir)
               info "sync the #{local_asset_dir} from server #{server_asset_dir}"
-              asset.pull(dir)
+              asset.pull(local_asset_dir, server_asset_dir)
             end
           end
         end
@@ -44,4 +46,3 @@ namespace :sync do
     end
   end
 end
-

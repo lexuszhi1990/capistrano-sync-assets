@@ -6,18 +6,12 @@ module Capistrano
         @port = cap.host.port || 22
       end
 
-      def pull(dir)
-        # system("rsync -a --del -L -K -vv --progress --rsh='ssh -p #{port}' #{user}@#{server}:#{cap.current_path}/#{dir} #{cap.fetch(:dir)}")
-        server_asset_dir = Utils.assets_dir "#{@shared_path}/#{dir}"
-        local_asset_dir = Utils.assets_dir "#{Dir.pwd}/#{dir}"
-
-        puts "rsync -avrt --recursive --times --compress --human-readable --progress --delete --rsh='ssh -p #{@port}' #{@user_host}:#{server_asset_dir} #{local_asset_dir}"
+      def pull(local_asset_dir, server_asset_dir)
+        system "rsync -avrt --recursive --times --compress --human-readable --progress --delete --rsh='ssh -p #{@port}' #{@user_host}:#{server_asset_dir} #{local_asset_dir}"
       end
 
       def push(server_asset_dir, local_asset_dir)
-        # system("rsync -a --del -L -K -vv --progress --rsh='ssh -p #{port}' #{user}@#{server}:#{cap.current_path}/#{dir} #{cap.fetch(:dir)}")
-
-        puts "rsync -avrt --recursive --times --compress --human-readable --progress --delete --rsh='ssh -p #{@port}' #{@user_host}:#{server_asset_dir} #{local_asset_dir}"
+        system "rsync -avrt --recursive --times --compress --human-readable --progress --delete --rsh='ssh -p #{@port}' #{local_asset_dir} #{@user_host}:#{server_asset_dir}"
       end
 
       def backup_local_asset(dir)

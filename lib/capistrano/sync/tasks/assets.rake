@@ -13,9 +13,7 @@ namespace :sync do
           sync_assets_dirs.each do |dir|
             server_asset_dir = Utils.assets_dir "#{shared_path}/#{dir}"
             local_asset_dir = Utils.assets_dir "#{Dir.pwd}/#{dir}"
-            # TODO: ask whether sync with backup
             if Utils.yes_or_no?("Are you SURE to upload the local assets to remote?")
-              require 'pry'; binding.pry
               asset.backup_server_asset(dir)
               asset.push(local_asset_dir, server_asset_dir)
             end

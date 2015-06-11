@@ -20,8 +20,8 @@ module Utils
       dir.end_with?('/') ? dir[0, dir.length-1] : dir
     end
 
-    def yes_or_no?(msg, prompt = "(y)es, (n)o ")
-      ask(:answer, "#{msg} #{prompt} ? ")
+    def yes_or_no?(msg, prompt = "(y)es, (n)o")
+      ask(:answer, "#{msg} #{prompt}")
       (fetch(:answer) =~ /^y$|^yes$/i) == 0
     end
   end

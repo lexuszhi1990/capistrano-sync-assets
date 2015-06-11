@@ -33,7 +33,7 @@ namespace :sync do
               server_asset_dir = Utils.assets_dir "#{@shared_path}/#{dir}"
               local_asset_dir = Utils.assets_dir "#{Dir.pwd}/#{dir}"
               # TODO: ask whether sync with backup
-              info "backup the #{local_asset_dir}"
+              info "backup the #{local_asset_dir}, move #{local_asset_dir} to #{local_asset_dir}_bak"
               asset.backup_local_asset(local_asset_dir)
               info "sync the #{local_asset_dir} from server #{server_asset_dir}"
               asset.pull(dir)

@@ -17,7 +17,7 @@ module Capistrano
       def backup_local_asset(local_asset_dir)
         local_backup_dir = "#{local_asset_dir}_bak"
         system("rm -r #{local_backup_dir}") if Dir.exist?(local_backup_dir)
-        system("cp #{local_asset_dir} #{local_backup_dir}") if Dir.exist?(local_asset_dir)
+        system("cp -r #{local_asset_dir} #{local_backup_dir}") if Dir.exist?(local_asset_dir)
       end
 
       def backup_server_asset(server_asset_dir)

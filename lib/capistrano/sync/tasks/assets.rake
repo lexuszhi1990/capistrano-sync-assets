@@ -15,7 +15,7 @@ namespace :sync do
             server_asset_dir = Capistrano::Sync::Utils.assets_dir "#{shared_path}/#{dir}"
             local_asset_dir = Capistrano::Sync::Utils.assets_dir "#{Dir.pwd}/#{dir}"
             if Capistrano::Sync::Utils.yes_or_no?("Are you SURE to upload the local assets to remote?")
-              asset.backup_server_asset(dir)
+              execute asset.backup_server_asset_cmd(server_asset_dir)
               asset.push(local_asset_dir, server_asset_dir)
             end
           end

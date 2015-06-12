@@ -8,7 +8,8 @@ Usage
 =======
 
 #### In your Gemfile:
-Add it to Gemfile on development groip
+Add it to Gemfile on development group
+
 ```ruby
   gem 'capistrano-sync-assets', require: false, group: :development
 ```

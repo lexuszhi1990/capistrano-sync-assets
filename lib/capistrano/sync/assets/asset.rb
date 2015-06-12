@@ -7,11 +7,11 @@ module Capistrano
       end
 
       def pull(local_asset_dir, server_asset_dir)
-        system "rsync -avrt --recursive --times --compress --human-readable --progress --delete --rsh='ssh -p #{@port}' #{@user_host}:#{server_asset_dir} #{local_asset_dir}"
+        system "rsync -avrt --recursive --times --compress --human-readable --progress --delete --rsh='ssh -p #{@port}' #{@user_host}:#{server_asset_dir}/ #{local_asset_dir}/"
       end
 
       def push(local_asset_dir, server_asset_dir)
-        system "rsync -avrt --recursive --times --compress --human-readable --progress --delete --rsh='ssh -p #{@port}' #{local_asset_dir} #{@user_host}:#{server_asset_dir}"
+        system "rsync -avrt --recursive --times --compress --human-readable --progress --delete --rsh='ssh -p #{@port}' #{local_asset_dir}/ #{@user_host}:#{server_asset_dir}/"
       end
 
       def backup_local_asset(local_asset_dir)
